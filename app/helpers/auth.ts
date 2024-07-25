@@ -1,6 +1,4 @@
-import Cookies from "universal-cookie";
-
-const storeLoginToken = async (token: string, days: number = 10) => {
+const storeLoginToken = async (token: string) => {
     await fetch('/api/login', {
         method: 'POST',
         headers: {
@@ -10,8 +8,15 @@ const storeLoginToken = async (token: string, days: number = 10) => {
     });
 }
 
-const removeLoginToken = () => {
-
+const removeLoginToken = async () => {
+    // let cookie = new Cookies();
+    // cookie.remove('shopy_token');
+    await fetch('/api/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
 }
 
 export {storeLoginToken, removeLoginToken};
